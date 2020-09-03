@@ -1,2 +1,8 @@
+# Default GitHub's setting
 *.class
 *.log
+
+# Intellij IDEA
+.idea
+project/target
+target
