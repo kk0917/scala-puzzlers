@@ -18,7 +18,6 @@ class C extends B {
   println("In C: " + foo + ", bar: " + bar)
 }
 
-new C()
 /**
  * scala> new C()
  * In A: foo: 0, bar: 0
@@ -58,4 +57,51 @@ class newC extends newB {
  * IN newB: foo: 25, bar: 99
  * In newC: foo: 25, bar: 99
  * res0: newC = newC@2c2a027c
+ */
+
+trait LazyA {
+  val foo: Int
+  lazy val bar = 10
+  println("In A: foo: " + foo + ", bar: " + bar)
+}
+
+class LazyB extends LazyA {
+  val foo: Int = 25
+  println("In B: foo: " + foo + ", bar: " + bar)
+}
+
+class LazyC extends LazyB {
+  override lazy val bar = 99
+  println("In C: foo: " + foo + ",bar:  " + bar)
+}
+/**
+ * scala> new LazyC
+ * In A: foo: 0, bar: 99
+ * In B: foo: 25, bar: 99
+ * In C: foo: 25,bar:  99
+ * res1: LazyC = LazyC@3cc053
+ */
+
+trait EarlyInitA {
+  val foo: Int
+  val bar = 10
+  println("In A: foo: " + foo + ", bar: " + bar)
+}
+
+class EarlyInitB extends EarlyInitA {
+  val foo: Int = 25
+  println("In B: foo: " + foo + ", bar: " + bar)
+}
+
+class EarlyInitC extends {
+  override val bar = 99 // early initializers
+} with EarlyInitB {
+  println("In C: foo: " + foo + ",bar:  " + bar)
+}
+/**
+ * scala> new EarlyInitC
+ * In A: foo: 0, bar: 99
+ * In B: foo: 25, bar: 99
+ * In C: foo: 25,bar:  99
+ * res3: EarlyInitC = PreInitC@13f36d75
  */
