@@ -1,6 +1,7 @@
-object Puzzle2 {
+object Puzzle2_1 {
   // hit variable on REPL
-  var MONTH = 12; var DAY = 24 // Successed output
+  var MONTH = 12;
+  var DAY = 24 // Successed output
   var (HOUR, MINUTE, SECOND) = (12, 0, 0) //compile error
 
   // hit REPL
@@ -8,10 +9,13 @@ object Puzzle2 {
   /**
    * scala>
    */
+  final val TheAnswer = 42
+
   def checkGuess(guess: Int): String = guess match {
     case TheAnswer => "Your guess is correct"
     case _ => "Try again"
   }
+
   /**
    * checkGuess: (guess: Int): String
    *
@@ -35,7 +39,8 @@ object Puzzle2 {
    * minute: Int = 0
    * second: Int = 0
    */
-  val HOUR = 12; val MINUTE, SECOND = 0;
+  val HOUR = 12;
+  val MINUTE, SECOND = 0;
   /**
    * scala>
    **/
@@ -49,8 +54,11 @@ object Puzzle2 {
   /**
    * scala.MatchError: (12,0,0) (of class scala.Tuple3)
    */
+}
+
+object Puzzle2_2 {
   final val theAnswer = 42
-  def checkGuess(guess: Int) = guess match {
+  def checkGuess(guess: Int): String = guess match {
     case `theAnswer` =>"Your guess is correct"
     case _ => "Try again"
   }
@@ -61,12 +69,12 @@ object Puzzle2 {
   /**
    * res0: String = Your guess is correct
    */
-  var theAnswer: Int = 42 // val (final) ではない
+  var theAnswerError: Int = 42 // val (final) ではない
   /**
    * scala>
    */
-  def checkGuess(guess: Int) = guess match {
-    case `theAnswer` => "Your guess is correct"
+  def checkGuessError(guess: Int): String = guess match {
+//    case `theAnswerError` => "Your guess is correct" // commentout to compile errors
     case _ => "Try again"
   }
   /**
