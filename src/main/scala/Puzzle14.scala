@@ -25,5 +25,26 @@ object Puzzle14 {
     if (n < 2) n
     else fibonacci(n - 1) + fibonacci(n - 2)
 
-  // ... to be continued
+  def findHotCurrency[A](
+    currencies: Seq[A],
+    threshold: (Double, Double) => Boolean): Option[A] = {
+
+    for (currency <- currencies) {
+      val oldRate = getCurrentRate(currency)
+      val newRate = fetchRate(currency)
+
+      if (threshold(oldRate, newRate)) Some(currency)
+    }
+
+    None
+  }
+
+  def getCurrentRate(a: Double): Int = { 999 }
+  def fetchRate(a: Double): Int = { 999 }
+
+  /** Summery
+   * If could, you shouldn't use explicit return.
+   * If you need to use explicit return, you should confirm to be return the intended place.
+   * You should warn that Return Phrase returns from method or local func, but not from the func definited into them.
+   */
 }
