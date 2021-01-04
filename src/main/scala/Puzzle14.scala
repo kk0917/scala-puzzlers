@@ -39,8 +39,8 @@ object Puzzle14 {
     None
   }
 
-  def getCurrentRate(a: Double): Int = { 999 }
-  def fetchRate(a: Double): Int = { 999 }
+  def getCurrentRate(a: Any): Double = { 999.99 }
+  def fetchRate(a: Any): Double      = { 999.99 }
 
   /** Summery
    * If could, you shouldn't use explicit return.
