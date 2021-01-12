@@ -19,7 +19,7 @@ object Puzzle18 {
   object Oh {
     def overloadA(u: Unit)             = "I accept a Unit"
     def overloadA(u: Unit, n: Nothing) = "I accept a Unit and Nothing"
-    def overloadB(u: Unit)             = "I accept a Uni"
+    def overloadB(u: Unit)             = "I accept a Unit"
     def overloadB(n: Nothing)          = "I accept Nothing"
   }
   /**
@@ -31,13 +31,41 @@ object Puzzle18 {
    * > println(Oh overloadB 99)
    *           ^
    * error: overloaded method overloadB with alternatives:
-   * (n: Nothing)String <and>
+   * (n: Nothing)String < and >
    * (u: Unit)String
    * cannot be applied to (Int)
    **/
 
-  def read(fileName: String): Array[Byte] = "..."
-  def read(file: java.io.File): Array[Byte] = "..."
+  def read(fileName: String): Array[Byte] = Array(-128)
+  def read(file: java.io.File): Array[Byte] = Array(127)
 
-  def read(magnet: ReadMagnet): magnet.Result = magnet.read
+  trait ReadMagnet {
+    type Result
+    def read(): Result
+  }
+
+  object MagnetPattern {
+    def read(magnet: ReadMagnet): magnet.Result = magnet.read
+
+    object ReadMagnet {
+      // case that arguments is String
+      implicit def fromString(fileName: String): ReadMagnet {type Result = String} =
+        new ReadMagnet {
+          type Result = String
+
+          def read(): Result = { /**...*/ }}
+
+      // case that arguments is java.io.File
+      implicit def fromFile(file: java.io.File): ReadMagnet {type Result = Array[Byte]} =
+        new ReadMagnet {
+          type Result = Array[Byte]
+
+          def read(): Result = { /**...*/ }}
+    }
+
+    import ReadMagnet._
+
+    val s = read("test.txt")
+    val b = read(new java.io.File("test.txt"))
+  }
 }
