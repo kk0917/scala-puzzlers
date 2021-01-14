@@ -47,25 +47,34 @@ object Puzzle18 {
   object MagnetPattern {
     def read(magnet: ReadMagnet): magnet.Result = magnet.read
 
+    trait ReadMagnet {
+      type Result
+      def read(): Result
+    }
+    // case that arguments is String
     object ReadMagnet {
-      // case that arguments is String
-      implicit def fromString(fileName: String): ReadMagnet {type Result = String} =
+      implicit def fromString(fileName: String) =
         new ReadMagnet {
           type Result = String
+          def read(): Result = { "aaa" }}
 
-          def read(): Result = { /**...*/ }}
-
-      // case that arguments is java.io.File
-      implicit def fromFile(file: java.io.File): ReadMagnet {type Result = Array[Byte]} =
+      implicit def fromFile(file: java.io.File) =
         new ReadMagnet {
           type Result = Array[Byte]
-
-          def read(): Result = { /**...*/ }}
+          def read(): Result = { Array("bbb".toByte) }}
     }
 
     import ReadMagnet._
 
-    val s = read("test.txt")
-    val b = read(new java.io.File("test.txt"))
+    val s: String      = read("test.txt")
+    val b: Array[Byte] = read(new java.io.File("test.txt"))
   }
+
+  object Oh2 {
+    def nonOverloadedA(f: () => Any) = "I accept a no-arg function"
+    def overloadedA(f: () => Any)    = "I accept a no-arg function"
+    def overloadedA(n: Nothing)      = "I accept Nothing"
+  }
+
+  def emptyParamList() = 99
 }
