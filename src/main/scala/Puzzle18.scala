@@ -81,7 +81,7 @@ object Puzzle18 {
   /** Summery
    *
    * 1. Be careful type conversion to be insert dependenting  of the expected type.
-   *      Converting their types may not be applied adding the overload the version's method called 
+   *      Converting their types may not be applied adding the overload the version's method called
    * 2. If define the overload method having had arguments of same numbers with existing it,
    *      even though the argument type of new method,
    *      Be careful to that the compile
