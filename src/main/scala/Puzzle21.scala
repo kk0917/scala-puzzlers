@@ -35,4 +35,11 @@ object Puzzle21 {
 
   println(new StringBuilder("U go now.").padTo(20, '*').mkString)
   // U go now.***********
+
+  /** Summery
+   * You Should notice when passing an expression that returns a function.
+   *   As a more general lesson,
+   *     let's check whether if there is the appropriate method into Scala's library
+   *       before writing your unique utilitiy or not.
+   */
 }
