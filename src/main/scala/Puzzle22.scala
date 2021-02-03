@@ -11,7 +11,8 @@ object Puzzle22 {
   }
 
   val scalaMap: mutable.Map[String, Integer] = javaMap.asScala
-  val scalaTypesMap: collection.Map[String, Int] = scalaMap.asInstanceOf[scala.collection.Map[String, Int]]
-  println(scalaTypesMap("key") == null)
-  println(scalaTypesMap("key") == 0)
+  val scalaTypesMap: collection.Map[String, Int] =
+    scalaMap.asInstanceOf[scala.collection.Map[String, Int]]
+//  println(scalaTypesMap("key") == null)
+//  println(scalaTypesMap("key") == 0)
 }
